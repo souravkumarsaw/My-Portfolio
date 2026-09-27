@@ -110,9 +110,21 @@ nav{position:fixed;z-index:50;}@media (pointer:fine){
 .typecursor{display:inline-block;width:2px;background:var(--signal);margin-left:4px;animation:blink 1s step-end infinite;}
 @keyframes blink{50%{opacity:0;}}
 .field-label{display:block;margin-bottom:8px;font-size:14px;color:var(--text);}
-.field-input{width:100%;background:#0e1218;border:1px solid var(--line);border-radius:10px;padding:13px 15px;
-  color:var(--text);font-family:'Sora',sans-serif;font-size:14px;
-.field-input:focus{outline:none;border-color:var(--signal);}
+.field-input{
+  width:100%;
+  background:#0e1218;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:13px 15px;
+  color:var(--text);
+  font-family:'Sora',sans-serif;
+  font-size:14px;
+}
+
+.field-input:focus{
+  outline:none;
+  border-color:var(--signal);
+}
 textarea.field-input{resize:vertical;min-height:120px;}
 select.field-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a94a1' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 15px center;}
@@ -171,7 +183,11 @@ select.field-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
     </div>
     <div class="flex items-center gap-4">
       <a href="https://github.com/souravkumarsaw" target="_blank" class="nav-link" title="GitHub" style="width:18px;"><svg width="18" height="18"><use href="#i-github"/></svg></a>
-      <a href="https://www.linkedin.com/in/sourav-kumar-saw-3b4065226/" target="_blank" class="nav-link" title="LinkedIn" style="width:18px;"><svg width="18" height="18"><use href="#i-linkedin"/></svg></a>
+      <a href="https://www.linkedin.com/in/sourav-kumar-saw-3b4065226/" target="_blank" rel="noopener noreferrer" class="nav-link" title="LinkedIn" style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;">
+  <svg width="18" height="18" viewBox="0 0 24 24">
+    <use href="#i-linkedin"></use>
+  </svg>
+</a>
       <a href="https://mail.google.com/mail/?view=cm&fs=1&to=souravkumarsaw4344@gmail.com&su=Let%27s%20Connect" target="_blank" class="btn btn-line" style="padding:8px 16px;font-size:13px;">Say hi</a>
     </div>
   </div>
