@@ -2,1113 +2,542 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sourav Kumar Saw - Software Engineer & Full-Stack Developer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sourav Kumar Saw — Software Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
-<script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>
-tailwind.config = {
-theme: {
-extend: {
-colors: {
-primary: '#10b981',
-secondary: '#8b5cf6'
-},
-borderRadius: {
-'none': '0px',
-'sm': '4px',
-DEFAULT: '8px',
-'md': '12px',
-'lg': '16px',
-'xl': '20px',
-'2xl': '24px',
-'3xl': '32px',
-'full': '9999px',
-'button': '8px'
-}
-}
-}
-}
-</script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Pacifico&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:where([class^="ri-"])::before {
-content: "\f3c2";
+/* Minimal utility layer — replaces the Tailwind CDN build so there's no runtime warning / CDN dependency */
+*,*::before,*::after{box-sizing:border-box;}
+body,h1,h2,h3,p,ul{margin:0;}
+ul{padding:0;list-style:none;}
+.flex{display:flex;} .grid{display:grid;} .hidden{display:none;}
+.flex-wrap{flex-wrap:wrap;} .items-center{align-items:center;} .items-baseline{align-items:baseline;}
+.justify-between{justify-content:space-between;} .justify-center{justify-content:center;}
+.text-center{text-align:center;} .relative{position:relative;} .font-semibold{font-weight:600;}
+.text-white{color:#fff;} .text-sm{font-size:.875rem;line-height:1.25rem;}
+.text-lg{font-size:1.125rem;line-height:1.75rem;} .text-xl{font-size:1.25rem;line-height:1.75rem;}
+.text-3xl{font-size:1.875rem;line-height:2.25rem;}
+.gap-2{gap:.5rem;} .gap-4{gap:1rem;} .gap-6{gap:1.5rem;} .gap-8{gap:2rem;} .gap-14{gap:3.5rem;}
+.mt-1{margin-top:.25rem;} .mt-5{margin-top:1.25rem;} .mt-6{margin-top:1.5rem;}
+.mt-8{margin-top:2rem;} .mt-10{margin-top:2.5rem;} .mt-16{margin-top:4rem;}
+.mb-2{margin-bottom:.5rem;} .mb-3{margin-bottom:.75rem;} .mb-4{margin-bottom:1rem;}
+.mb-8{margin-bottom:2rem;} .mb-10{margin-bottom:2.5rem;} .pt-5{padding-top:1.25rem;}
+.max-w-xl{max-width:36rem;} .max-w-lg{max-width:32rem;}
+.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.space-y-2>*+*{margin-top:.5rem;} .space-y-12>*+*{margin-top:3rem;}
+@media (min-width:768px){
+  .md\:flex{display:flex;} .md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr));}
 }
-body {
-background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-overflow-x: hidden;
+@media (min-width:1024px){
+  .lg\:block{display:block;} .lg\:grid-cols-\[1fr_260px\]{grid-template-columns:1fr 260px;}
 }
-.particle {
-position: absolute;
-border-radius: 50%;
-pointer-events: none;
-animation: float 8s ease-in-out infinite;
-opacity: 0.6;
+:root{
+  --bg:#0b0e11; --panel:#12161b; --line:#212831; --text:#e7ebef; --muted:#8a94a1;
+  --signal:#5eead4; --signal2:#f59e0b; --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
 }
-@keyframes float {
-0%, 100% {
-transform: translateY(0px) translateX(0px) rotate(0deg);
-opacity: 0.3;
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:calc(80px + var(--safe-t));}
+body{
+  background:var(--bg); color:var(--text); font-family:'Sora',sans-serif;
+  padding-top:var(--safe-t); padding-bottom:var(--safe-b); margin:0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center -1px;
 }
-25% {
-transform: translateY(-30px) translateX(20px) rotate(90deg);
-opacity: 0.8;
+.mono{font-family:'JetBrains Mono',monospace;}
+.pacifico{
+  font-family:'Pacifico',cursive;
+  font-size:22px;
+  font-weight:400;
+  color:var(--signal);
+  text-decoration:none;
 }
-50% {
-transform: translateY(-60px) translateX(-10px) rotate(180deg);
-opacity: 0.6;
+.pacifico span{color:var(--muted);}
+.container{max-width:1080px;margin:0 auto;padding:0 24px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:var(--safe-t);
+  background:rgba(11,14,17,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1080px;margin:0 auto;}
+.nav-link{color:var(--muted);text-decoration:none;font-size:14px;transition:color .2s;}
+.nav-link:hover{color:var(--signal);}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--signal);
+  border:1px solid rgba(94,234,212,.3);background:rgba(94,234,212,.06);border-radius:999px;padding:5px 12px;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 8px var(--signal);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.hero-title{font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.02;font-weight:700;letter-spacing:-0.02em;}
+.grad{background:linear-gradient(135deg,var(--signal),var(--signal2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:8px;font-weight:600;font-size:14px;
+  text-decoration:none;transition:transform .2s,box-shadow .2s;}
+.btn-solid{background:var(--signal);color:#08110f;}
+.btn-solid:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(94,234,212,.25);}
+.btn-line{border:1px solid var(--line);color:var(--text);}
+.btn-line:hover{border-color:var(--signal);color:var(--signal);}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:28px;}
+.card:hover{border-color:#2c3540;}
+.eyebrow{font-size:13px;color:var(--muted);}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:500;color:var(--signal);}
+.timeline{position:relative;padding-left:28px;border-left:1px solid var(--line);}
+.timeline-dot{position:absolute;left:-33px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--signal);}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:4px 9px;}
+.skill-row{display:flex;flex-wrap:wrap;gap:8px;}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+::selection{background:var(--signal);color:#08110f;}
+a{color:inherit;}
+#net{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;}
+section,footer{position:relative;z-index:1;}
+nav{position:fixed;z-index:50;}@media (pointer:fine){
+  body{cursor:none;}
+  #cur-dot,#cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;
+    transform:translate(-50%,-50%);will-change:transform;}
+  #cur-dot{width:5px;height:5px;background:var(--signal);box-shadow:0 0 8px var(--signal);}
+  #cur-ring{width:32px;height:32px;border:1px solid var(--signal);opacity:.6;transition:width .18s,height .18s,opacity .18s,border-color .18s;}
+  #cur-ring::before,#cur-ring::after{content:'';position:absolute;background:var(--signal);}
+  #cur-ring::before{left:50%;top:-6px;width:1px;height:5px;transform:translateX(-50%);}
+  #cur-ring::after{left:-6px;top:50%;width:5px;height:1px;transform:translateY(-50%);}
+  a:hover ~ #cur-ring, a:hover + #cur-ring, .cur-hover #cur-ring{width:52px;height:52px;opacity:1;border-color:var(--signal2);}
 }
-75% {
-transform: translateY(-20px) translateX(-30px) rotate(270deg);
-opacity: 0.9;
-}
-}
-.geometric-shape {
-position: absolute;
-border-radius: 50%;
-background: linear-gradient(45deg, #10b981, #8b5cf6);
-animation: orbit 15s linear infinite;
-opacity: 0.1;
-}
-@keyframes orbit {
-0% { transform: rotate(0deg) translateX(200px) rotate(0deg); }
-100% { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
-}
-.typewriter {
-overflow: hidden;
-border-right: 3px solid #10b981;
-white-space: nowrap;
-animation: typing 4s steps(50, end), blink-caret 1s step-end infinite;
-}
-@keyframes typing {
-from { width: 0 }
-to { width: 100% }
-}
-@keyframes blink-caret {
-from, to { border-color: transparent }
-50% { border-color: #10b981 }
-}
-.fade-in-up {
-opacity: 0;
-transform: translateY(30px);
-animation: fadeInUp 1s ease-out forwards;
-}
-@keyframes fadeInUp {
-to {
-opacity: 1;
-transform: translateY(0);
-}
-}
-.skill-cloud {
-perspective: 1000px;
-}
-.skill-tag {
-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-cursor: pointer;
-position: relative;
-overflow: hidden;
-}
-.skill-tag::before {
-content: '';
-position: absolute;
-top: 0;
-left: -100%;
-width: 100%;
-height: 100%;
-background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.2), transparent);
-transition: left 0.5s;
-}
-.skill-tag:hover::before {
-left: 100%;
-}
-.skill-tag:hover {
-transform: scale(1.1) rotateX(10deg);
-background: linear-gradient(135deg, #10b981, #8b5cf6);
-color: white;
-box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-}
-.project-card {
-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-position: relative;
-overflow: hidden;
-background: linear-gradient(145deg, #1f2937, #374151);
-}
-.project-card::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(139, 92, 246, 0.1));
-opacity: 0;
-transition: opacity 0.3s;
-}
-.project-card:hover::before {
-opacity: 1;
-}
-.project-card:hover {
-transform: translateY(-10px) rotateX(5deg);
-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-.upload-area {
-border: 2px dashed #374151;
-transition: all 0.3s ease;
-}
-.upload-area:hover {
-border-color: #10b981;
-background-color: rgba(16, 185, 129, 0.05);
-}
-.upload-area.dragover {
-border-color: #10b981;
-background-color: rgba(16, 185, 129, 0.1);
-}
-.nav-link {
-position: relative;
-transition: color 0.3s ease;
-}
-.nav-link::after {
-content: '';
-position: absolute;
-bottom: -5px;
-left: 0;
-width: 0;
-height: 2px;
-background: linear-gradient(90deg, #10b981, #8b5cf6);
-transition: width 0.3s ease;
-}
-.nav-link:hover::after {
-width: 100%;
-}
-.glow-button {
-position: relative;
-overflow: hidden;
-}
-.glow-button::before {
-content: '';
-position: absolute;
-top: 0;
-left: -100%;
-width: 100%;
-height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-transition: left 0.5s;
-}
-.glow-button:hover::before {
-left: 100%;
-}
-.scroll-indicator {
-position: absolute;
-bottom: 30px;
-left: 50%;
-transform: translateX(-50%);
-animation: bounce 2s infinite;
-}
-@keyframes bounce {
-0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-40% { transform: translateX(-50%) translateY(-10px); }
-60% { transform: translateX(-50%) translateY(-5px); }
-}
-.section-reveal {
-opacity: 0;
-transform: translateY(50px);
-transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.section-reveal.revealed {
-opacity: 1;
-transform: translateY(0);
-}
-.admin-panel {
-position: fixed;
-top: 0;
-right: -400px;
-width: 400px;
-height: 100vh;
-background: linear-gradient(135deg, #1f2937, #374151);
-z-index: 1000;
-transition: right 0.3s ease;
-overflow-y: auto;
-}
-.admin-panel.open {
-right: 0;
-}
-.file-preview {
-max-width: 100px;
-max-height: 100px;
-object-fit: cover;
-border-radius: 8px;
-}
-@media (max-width: 768px) {
-.admin-panel {
-width: 100%;
-right: -100%;
-}
-}
+.glitch{position:relative;}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;overflow:hidden;color:var(--bg);}
+.glitch::before{color:var(--signal);clip-path:inset(0 0 92% 0);transform:translate(-2px,0);animation:gl1 5s infinite;}
+.glitch::after{color:var(--signal2);clip-path:inset(88% 0 0 0);transform:translate(2px,0);animation:gl2 6s infinite;}
+@keyframes gl1{0%,92%,100%{opacity:0;}93%,96%{opacity:.8;transform:translate(-3px,-1px);}}
+@keyframes gl2{0%,90%,100%{opacity:0;}91%,95%{opacity:.7;transform:translate(3px,1px);}}
+.typecursor{display:inline-block;width:2px;background:var(--signal);margin-left:4px;animation:blink 1s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
+.field-label{display:block;margin-bottom:8px;font-size:14px;color:var(--text);}
+.field-input{width:100%;background:#0e1218;border:1px solid var(--line);border-radius:10px;padding:13px 15px;
+  color:var(--text);font-family:'Sora',sans-serif;font-size:14px;
+.field-input:focus{outline:none;border-color:var(--signal);}
+textarea.field-input{resize:vertical;min-height:120px;}
+select.field-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a94a1' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;}
+#solar{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:.5;}
+.sun{position:absolute;top:50%;left:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;
+  background:radial-gradient(circle,#fff5d6,var(--signal2) 60%);box-shadow:0 0 40px 10px rgba(245,158,11,.45);}
+.orbit-ring{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid rgba(94,234,212,.16);}
+.o-r1{width:150px;height:150px;margin:-75px 0 0 -75px;}
+.o-r2{width:270px;height:270px;margin:-135px 0 0 -135px;}
+.o-r3{width:400px;height:400px;margin:-200px 0 0 -200px;}
+.o-r4{width:540px;height:540px;margin:-270px 0 0 -270px;}
+.orbit-spin{position:absolute;top:50%;left:50%;border-radius:50%;animation:spin linear infinite;}
+.o-s1{width:150px;height:150px;margin:-75px 0 0 -75px;animation-duration:9s;}
+.o-s2{width:270px;height:270px;margin:-135px 0 0 -135px;animation-duration:17s;animation-direction:reverse;}
+.o-s3{width:400px;height:400px;margin:-200px 0 0 -200px;animation-duration:26s;}
+.o-s4{width:540px;height:540px;margin:-270px 0 0 -270px;animation-duration:38s;animation-direction:reverse;}
+.planet{position:absolute;top:0;left:50%;border-radius:50%;transform:translate(-50%,-50%);}
+.pl1{width:6px;height:6px;background:#5eead4;box-shadow:0 0 8px #5eead4;}
+.pl2{width:9px;height:9px;background:#f59e0b;box-shadow:0 0 10px #f59e0b;}
+.pl3{width:7px;height:7px;background:#818cf8;box-shadow:0 0 8px #818cf8;}
+.pl4{width:11px;height:11px;background:#f472b6;box-shadow:0 0 10px #f472b6;}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@media (prefers-reduced-motion: reduce){.dot{animation:none;}.reveal{transition:none;opacity:1;transform:none;}
+  .glitch::before,.glitch::after{display:none;} body{cursor:auto;} #cur-dot,#cur-ring{display:none;} .orbit-spin{animation:none;}}
 </style>
 </head>
 <body class="text-white">
-<nav class="fixed top-0 w-full z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-700/50">
-<div class="max-w-7xl mx-auto px-6 py-4">
-<div class="flex items-center justify-between">
-<div class="flex items-center space-x-4">
-<div class="font-['Pacifico'] text-3xl text-primary">S.K</div>
-<span class="text-sm text-gray-400 hidden md:block">SOFTWARE DEVELOPER</span>
+<svg style="display:none">
+  <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8.3 18.5H5.7V9.7h2.6v8.8ZM7 8.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm11.5 10h-2.6v-4.3c0-1-.4-1.8-1.4-1.8-.7 0-1.2.5-1.4 1-.1.2-.1.5-.1.8v4.3h-2.6s.1-8 0-8.8h2.6v1.3c.3-.5 1-1.4 2.5-1.4 1.8 0 3.2 1.2 3.2 3.8v5.1Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1.8 2 7.2 5.4L19.2 7H4.8Zm-.8 1.4V17h18V8.4l-8.4 6.3a1 1 0 0 1-1.2 0L4 8.4Z"/></symbol>
+</svg>
+
+<canvas id="net"></canvas>
+<div id="solar">
+  <div class="sun"></div>
+  <div class="orbit-ring o-r1"></div><div class="orbit-ring o-r2"></div>
+  <div class="orbit-ring o-r3"></div><div class="orbit-ring o-r4"></div>
+  <div class="orbit-spin o-s1"><span class="planet pl1"></span></div>
+  <div class="orbit-spin o-s2"><span class="planet pl2"></span></div>
+  <div class="orbit-spin o-s3"><span class="planet pl3"></span></div>
+  <div class="orbit-spin o-s4"><span class="planet pl4"></span></div>
 </div>
+<div id="cur-ring"></div><div id="cur-dot"></div>
 
-
-
-
-<div class="flex items-center space-x-8">
-  <a href="#home" class="nav-link text-gray-300 hover:text-primary">Home</a>
-  <a href="#about" class="nav-link text-gray-300 hover:text-primary">About</a>
-  <a href="#coding-profiles" class="hover:text-primary transition">Developer Profiles</a>
-  <a href="#experience" class="nav-link text-gray-300 hover:text-primary">Experience</a>
-  <a href="#projects" class="nav-link text-gray-300 hover:text-primary">Projects</a>
-  <a href="#contact" class="nav-link text-gray-300 hover:text-primary">Contact</a>
-</div>
-
-</div>
-</div>
-</nav>
-<!-- Desktop Menu -->
-<div class="hidden md:flex items-center space-x-8">
-  <a href="#home" class="nav-link text-gray-300 hover:text-primary">Home</a>
-  <a href="#about" class="nav-link text-gray-300 hover:text-primary">About</a>
-  <a href="#coding-profiles" class="hover:text-primary transition">Developer Profiles</a>
-  <a href="#experience" class="nav-link text-gray-300 hover:text-primary">Experience</a>
-  <a href="#projects" class="nav-link text-gray-300 hover:text-primary">Projects</a>
-  <a href="#contact" class="nav-link text-gray-300 hover:text-primary">Contact</a>
-</div>
-
-
-
-
-  
-<!-- Mobile Menu Button -->
-<div class="md:hidden">
-  <button id="mobile-menu-toggle" class="text-gray-300 hover:text-primary">
-    <i class="ri-menu-line text-2xl"></i>
-  </button>
-</div>
-
-
-
-
-
-
-<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-<div id="particles-container" class="absolute inset-0"></div>
-<div class="geometric-shape w-32 h-32 top-20 left-20"></div>
-<div class="geometric-shape w-24 h-24 top-40 right-32" style="animation-delay: -5s;"></div>
-<div class="geometric-shape w-16 h-16 bottom-32 left-40" style="animation-delay: -10s;"></div>
-<div class="relative z-10 max-w-6xl mx-auto px-6">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-<div class="space-y-8 z-20 relative">
-<div class="fade-in-up">
-<span class="text-primary text-sm font-semibold tracking-wider uppercase">WELCOME</span>
-</div>
-<div class="fade-in-up" style="animation-delay: 0.2s;">
-<h1 class="text-6xl md:text-7xl font-bold leading-tight tracking-tight font-['Times_New_Roman']">
-Hi, I'm <span class="text-primary">SOURAV</span>. 👋<br>
-<span class="typewriter z-10 relative bg-[#0f0f23]/90 backdrop-blur-sm text-4xl md:text-5xl">I'm Software Developer</span>
-</h1>
-</div>
-<div class="fade-in-up" style="animation-delay: 0.4s;">
-<p class="text-xl text-gray-300 max-w-lg">
-I'm a Computer Science student and self-motivated developer with strong skills in C++, Java, Python, MERN Stack, and WebRTC. With hands-on experience in 5+ projects and a published research paper, I'm passionate about clean code, performance, and real-time systems.
-</p>
-</div>
-<div class="fade-in-up flex flex-wrap gap-4" style="animation-delay: 0.6s;">
-<a href="https://github.com/souravkumarsaw" target="_blank" class="glow-button bg-primary text-gray-900 px-8 py-3 !rounded-button font-semibold hover:bg-secondary transition-all duration-300 whitespace-nowrap">
-GitHub
-
-
-<a href="https://mail.google.com/mail/?view=cm&fs=1&to=souravkumarsaw4344@gmail.com&su=Let's%20Connect&body=Hi%20Sourav," 
-   target="_blank" 
-   onclick="showThankYouMessage()">
-  <button class="glow-button border-2 border-primary text-primary px-8 py-3 !rounded-button hover:bg-primary hover:text-gray-900 transition-all duration-300 whitespace-nowrap">
-    Let's Connect
-  </button>
-</a>
-
-<p id="thankYouMessage" style="display:none; color:green; margin-top:10px; font-weight:bold;">
-  ✅ Thank you! We will shortly connect with you.
-</p>
-
-<script>
-  function showThankYouMessage() {
-    document.getElementById("thankYouMessage").style.display = "block";
-  }
-</script>
-
-
-
-
-</div>
-</div>
-<div class="relative lg:block hidden">
-<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
-<img src="https://readdy.ai/api/search-image?query=modern%20software%20developer%20workspace%20with%20multiple%20monitors%20displaying%20code%2C%20futuristic%20programming%20environment%2C%20dark%20theme%20with%20neon%20green%20and%20purple%20accents%2C%20clean%20desk%20setup%2C%20professional%20coding%20atmosphere%2C%20high-tech%20development%20station&width=600&height=600&seq=hero-dev&orientation=squarish"
-alt="Developer workspace"
-class="relative z-10 w-full h-auto rounded-2xl shadow-2xl translate-x-24">
-</div>
-</div>
-</div>
-<div class="scroll-indicator">
-<i class="ri-arrow-down-line text-2xl text-primary"></i>
-</div>
-</section>
-<section id="about" class="py-20 section-reveal">
-<div class="max-w-7xl mx-auto px-6">
-<div class="text-center mb-16">
-<h2 class="text-4xl font-bold mb-4">
-I build scalable web apps, web pages and also take up freelance projects.
-</h2>
-<p class="text-gray-300 max-w-3xl mx-auto">
-I work with C++, Java, Python along with MySQL, MS Office and Linux.
-I also provide freelance services in data entry, report/document preparation, and research paper writing.
-I'm providing full-featured web services including web design, development and search engine optimization.
-</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-<div class="text-center p-8 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-<div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-xl mx-auto mb-4">
-<i class="ri-code-line text-2xl text-primary"></i>
-</div>
-<h3 class="text-xl font-semibold mb-2">Web Apps</h3>
-<p class="text-gray-400 text-sm">
-Develop web applications in different programming languages.
-</p>
-</div>
-<div class="text-center p-8 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-<div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-xl mx-auto mb-4">
-<i class="ri-shopping-cart-line text-2xl text-primary"></i>
-</div>
-<h3 class="text-xl font-semibold mb-2">E-Commerce</h3>
-<p class="text-gray-400 text-sm">
-Build ecommerce sites and provide technical solutions.
-</p>
-</div>
-<div class="text-center p-8 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-<div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-xl mx-auto mb-4">
-<i class="ri-smartphone-line text-2xl text-primary"></i>
-</div>
-<h3 class="text-xl font-semibold mb-2">Freelancing</h3>
-<p class="text-gray-400 text-sm">
-Provide services in:
-
-Data Entry & Report Making
-
-Research Paper Assistance & Documentation
-
-MS Office Projects (Excel, Word, PowerPoint)
-</p>
-</div>
-</div>
-<div class="skill-cloud">
-<div class="text-center mb-8">
-<h3 class="text-2xl font-bold text-primary mb-4">LANGUAGES & TOOLS</h3>
-<p class="text-gray-300 mb-8">
-Experienced with a wide range of programming languages, frameworks, and development tools.
-</p>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="p-6 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-<h4 class="text-lg font-semibold mb-4 text-primary">Programming Languages</h4>
-<div class="flex flex-wrap gap-3">
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">C</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">C++</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">Java</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">Python</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">HTML</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">CSS</span>
-</div>
-</div>
-<div class="p-6 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-<h4 class="text-lg font-semibold mb-4 text-primary">Frameworks & Technologies</h4>
-<div class="flex flex-wrap gap-3">
-
-
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">NumPy</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">Pandas</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">Node.js</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">Express</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">WebRTC</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">Socket.io</span>
-</div>
-</div>
-
-
-<div class="p-6 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-<h4 class="text-lg font-semibold mb-4 text-primary">Tools & Systems</h4>
-<div class="flex flex-wrap gap-3">
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">Git/ GitHub</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">Linux</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">VS Code</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">MongoDB</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">MySQL</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">DSA</span>
-<span class="skill-tag px-4 py-2 bg-gray-800/70 rounded-full text-sm font-medium border border-gray-700/50">MS Office</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-
-
-
-
-
-
-<section id="coding-profiles" class="py-20 section-reveal">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-4xl font-bold mb-10 text-center">Developer Profiles</h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-
-      <!-- LeetCode -->
-      <div class="p-6 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-        <h4 class="text-lg font-semibold mb-4 text-primary">LeetCode</h4>
-        <a href="https://leetcode.com/u/SouravKr646/" target="_blank"
-           class="flex items-center gap-3 px-4 py-3 bg-gray-800/70 rounded-xl
-                  border border-gray-700/50 hover:bg-primary hover:text-gray-900 transition-all">
-          <i class="ri-code-line text-xl"></i> Visit Profile
-        </a>
-      </div>
-
-      <!-- HackerRank -->
-      <div class="p-6 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-        <h4 class="text-lg font-semibold mb-4 text-primary">HackerRank</h4>
-        <a href="https://www.hackerrank.com/souravkumarsaw41" target="_blank"
-           class="flex items-center gap-3 px-4 py-3 bg-gray-800/70 rounded-xl
-                  border border-gray-700/50 hover:bg-primary hover:text-gray-900 transition-all">
-          <i class="ri-trophy-line text-xl"></i> Visit Profile
-        </a>
-      </div>
-
-      <!-- CodeChef -->
-      <div class="p-6 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-        <h4 class="text-lg font-semibold mb-4 text-primary">CodeChef</h4>
-        <a href="https://www.codechef.com/users/s_k646" target="_blank"
-           class="flex items-center gap-3 px-4 py-3 bg-gray-800/70 rounded-xl
-                  border border-gray-700/50 hover:bg-primary hover:text-gray-900 transition-all">
-          <i class="ri-terminal-box-line text-xl"></i> Visit Profile
-        </a>
-      </div>
-
-      <!-- GitHub -->
-      <div class="p-6 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-        <h4 class="text-lg font-semibold mb-4 text-primary">GitHub</h4>
-        <a href="https://github.com/souravkumarsaw" target="_blank"
-           class="flex items-center gap-3 px-4 py-3 bg-gray-800/70 rounded-xl
-                  border border-gray-700/50 hover:bg-primary hover:text-gray-900 transition-all">
-          <i class="ri-github-line text-xl"></i> Visit Profile
-        </a>
-      </div>
-
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="pacifico">SK<span>/dev</span></a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#education" class="nav-link">Education</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </div>
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/souravkumarsaw" target="_blank" class="nav-link" title="GitHub" style="width:18px;"><svg width="18" height="18"><use href="#i-github"/></svg></a>
+      <a href="https://linkedin.com/in/sourav-kumar-saw" target="_blank" class="nav-link" title="LinkedIn" style="width:18px;"><svg width="18" height="18"><use href="#i-linkedin"/></svg></a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=souravkumarsaw4344@gmail.com&su=Let%27s%20Connect" target="_blank" class="btn btn-line" style="padding:8px 16px;font-size:13px;">Say hi</a>
+    </div>
+  </div>
+</nav>
+
+<section id="home" class="container" style="padding-top:150px;padding-bottom:90px;">
+  <div class="grid lg:grid-cols-[1fr_260px] gap-14 items-center">
+  <div>
+  <span class="badge"><span class="dot"></span>Open to Software Engineering roles</span>
+  <h1 class="hero-title mt-6 glitch" data-text="Sourav Kumar Saw.">
+    <br>Hi,</br>
+    I'm Sourav Kumar Saw.<br>
+    I build <span class="grad">real-time systems</span><br>
+    that don't fall over.
+  </h1>
+  <p class="mt-6 max-w-xl mono" style="color:var(--muted);font-size:1rem;min-height:1.4em;">
+    <span id="typed"></span><span class="typecursor">&nbsp;</span>
+  </p>
+  <div class="flex flex-wrap gap-4 mt-8">
+    <a href="https://github.com/souravkumarsaw" target="_blank" class="btn btn-solid">View GitHub</a>
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=souravkumarsaw4344@gmail.com&su=Let%27s%20Connect" target="_blank" class="btn btn-line">Let's connect</a>
+  </div>
+  <div class="grid grid-cols-3 gap-6 mt-16 max-w-lg">
+    <div><div class="stat-num" data-count="99.5" data-suffix="%">0</div><div class="eyebrow mt-1">IoT fleet uptime</div></div>
+    <div><div class="stat-num" data-count="250" data-suffix="+">0</div><div class="eyebrow mt-1">devices managed</div></div>
+    <div><div class="stat-num" data-count="1" data-suffix="K+">0</div><div class="eyebrow mt-1">test cases executed</div></div>
+  </div>
+  </div>
+  <div class="hidden lg:block">
+    <svg viewBox="0 0 260 220" width="260" height="220" style="filter:drop-shadow(0 0 26px rgba(94,234,212,.2));">
+      <ellipse cx="130" cy="200" rx="90" ry="8" fill="#000" opacity=".35"/>
+      <path d="M40 175 L60 65 L200 65 L220 175 Z" fill="none" stroke="#5eead4" stroke-width="1" opacity=".35"/>
+      <rect x="60" y="65" width="140" height="95" rx="4" fill="#0e1216" stroke="#212831" stroke-width="1.5"/>
+      <rect x="66" y="71" width="128" height="83" rx="2" fill="#0b0e11"/>
+      <g font-family="JetBrains Mono, monospace" font-size="7" fill="#5eead4">
+        <text x="72" y="83">function <tspan fill="#f59e0b">buildFleet</tspan>() {</text>
+        <text x="78" y="94" fill="#8a94a1">const uptime = 99.5;</text>
+        <text x="78" y="105" fill="#8a94a1">mqtt.<tspan fill="#5eead4">connect</tspan>(broker);</text>
+        <text x="78" y="116" fill="#8a94a1">while (fleet.<tspan fill="#5eead4">isOnline</tspan>) {</text>
+        <text x="84" y="127" fill="#f59e0b">sync(devices);</text>
+        <text x="78" y="138">}</text>
+        <text x="72" y="149">}</text>
+      </g>
+      <rect x="66" y="71" width="128" height="83" rx="2" fill="none" stroke="#5eead4" stroke-width=".5" opacity=".5">
+        <animate attributeName="y" values="71;150;71" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="height" values="2;2;2" dur="4s" repeatCount="indefinite"/>
+      </rect>
+      <path d="M40 175 L220 175 L235 195 L25 195 Z" fill="#151b21" stroke="#212831" stroke-width="1.5"/>
+      <circle cx="130" cy="185" r="2" fill="#5eead4"/>
+    </svg>
+  </div>
   </div>
 </section>
 
+<section id="experience" class="container reveal" style="padding-bottom:90px;">
+  <div class="eyebrow mono mb-2">01 — Experience</div>
+  <h2 class="text-3xl font-semibold mb-10">Where I've worked</h2>
 
-
-  
-
-  
-
-
-
-
-<section id="experience" class="py-20 section-reveal">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4">Experience</h2>
-      <p class="text-gray-300 max-w-3xl mx-auto">
-        Here are the companies I’ve worked with and the roles I’ve taken up during my journey.
-      </p>
-    </div>
-
-    <div class="space-y-8">
-      <!-- Mahat Labs -->
-      <div class="p-6 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50 hover:scale-105 transition-all">
-        <h3 class="text-2xl font-semibold text-primary">Junior Software Engineer</h3>
-        <p class="text-gray-400">Mahat Labs Private Limited | Sep 2025 – Present</p>
-        <ul class="mt-3 text-gray-300 list-disc list-inside">
-          <li>Performed site and system monitoring to detect anomalies, data issues, and performance limitations in IoT deployments.</li>
-          <li>Debugged and optimized software modules for device-cloud integration & improving system stability and performance efficiency.</li>
-          <li>Assisted in automating validation workflows, and deployment of device management software using Embeded C, and APIs.</li>
-          <li>Ensuring system reliability, connectivity, and security in IoT ecosystems.</li>
+  <div class="timeline space-y-12">
+    <div class="relative">
+      <div class="timeline-dot"></div>
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <h3 class="text-xl font-semibold">System Engineer</h3>
+        <span class="mono text-sm" style="color:var(--signal);">Jun 2026 — Present</span>
+      </div>
+      <p class="eyebrow mb-3">Tata Consultancy Services (TCS)</p>
+      <div class="card">
+        <p class="font-semibold mb-2">SAP Enterprise Systems</p>
+        <ul class="space-y-2 text-sm" style="color:var(--muted);">
+          <li>Working on an SAP project — hands-on exposure to SAP enterprise applications, business processes, and project workflows.</li>
+          <li>Developing understanding of SAP systems, troubleshooting, testing, and enterprise application processes alongside the project team.</li>
+          <li>Building software engineering fundamentals through Java, SQL, Git, Linux, OOPs and Agile practice.</li>
         </ul>
       </div>
+    </div>
 
-      <!-- Freelance Work -->
-    <div class="p-6 bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700/50 hover:scale-105 transition-all">
-      <h3 class="text-2xl font-semibold text-primary">Freelance Work</h3>
-      <p class="text-gray-400">Self-Employed | 2023 – 2024</p>
-      <ul class="mt-3 text-gray-300 list-disc list-inside">
-        <li>Delivered accurate and efficient data entry services for clients.</li>
-        <li>Prepared professional documentation, reports, and academic content.</li>
-        <li>Authored and delivered research and review papers for clients.</li>
+    <div class="relative">
+      <div class="timeline-dot"></div>
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <h3 class="text-xl font-semibold">Junior Software Engineer — IoT & Full-Stack</h3>
+        <span class="mono text-sm" style="color:var(--signal);">Sep 2025 — May 2026</span>
+      </div>
+      <p class="eyebrow mb-3">Mahat Lab Pvt. Ltd. · On-site client deployment</p>
+
+      <div class="card mb-4">
+        <p class="font-semibold mb-2">Fleet Focus — Real-Time IoT Fleet Monitoring</p>
+        <ul class="space-y-2 text-sm" style="color:var(--muted);">
+          <li>Sustained 99.5%+ uptime across 150+ distributed IoT endpoints by architecting real-time MQTT telemetry pipelines (TPMS/CAN bus) with automated PostgreSQL data-integrity validation.</li>
+          <li>Cut device provisioning time by 60% and hit 100% configuration consistency by automating embedded board-flashing and OS-provisioning workflows.</li>
+          <li>Reduced manual device-management overhead for 250+ endpoints by owning the full device lifecycle via AirDroid Biz Daemon.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="font-semibold mb-2">LMV — Vehicle Booking & Driver Management Platform</p>
+        <ul class="space-y-2 text-sm" style="color:var(--muted);">
+          <li>Expanded regression coverage by 45% and cut post-release bugs by 30% by designing and executing 200+ functional/regression test cases across a high-traffic, multi-service mobile platform.</li>
+          <li>Resolved live production incidents end-to-end via API-level root-cause analysis, partnering with backend engineers on hotfixes.</li>
+          <li>Presented deployment status and system-health metrics in recurring reviews with the CEO and General Managers.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="timeline-dot"></div>
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <h3 class="text-xl font-semibold">Freelance Work</h3>
+        <span class="mono text-sm" style="color:var(--signal);">2021 — 2024</span>
+      </div>
+      <p class="eyebrow mb-3">Self-Employed</p>
+      <div class="card">
+        <p class="font-semibold mb-2">Data & Documentation Services</p>
+        <ul class="space-y-2 text-sm" style="color:var(--muted);">
+          <li>Delivered accurate, efficient data entry services for clients.</li>
+          <li>Prepared professional documentation, reports, and academic content.</li>
+          <li>Authored and delivered research and review papers on request.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="container reveal" style="padding-bottom:90px;">
+  <div class="eyebrow mono mb-2">02 — Projects</div>
+  <h2 class="text-3xl font-semibold mb-10">Things I've built</h2>
+  <div class="grid md:grid-cols-3 gap-6">
+
+    <div class="card">
+      <p class="tag mb-4" style="display:inline-block;">WebRTC · Socket.io</p>
+      <h3 class="font-semibold text-lg mb-2">Real-Time Video Calling App</h3>
+      <p class="text-sm mb-4" style="color:var(--muted);">P2P video architecture with optimized ICE signaling — 95% connection success, &lt;200ms latency. MongoDB-indexed signaling backend cut retrieval time 40%.</p>
+      <div class="skill-row">
+        <span class="tag">JavaScript</span><span class="tag">Node.js</span><span class="tag">MongoDB</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="tag mb-4" style="display:inline-block;">1,000+ writes/sec</p>
+      <h3 class="font-semibold text-lg mb-2">Elect Ease — Secure Voting System</h3>
+      <p class="text-sm mb-4" style="color:var(--muted);">High-concurrency distributed voting engine with JWT-based RBAC, live WebSocket analytics, and an immutable, ACID-compliant audit log.</p>
+      <div class="skill-row">
+        <span class="tag">React.js</span><span class="tag">Express</span><span class="tag">JWT</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="tag mb-4" style="display:inline-block;">85% accuracy</p>
+      <h3 class="font-semibold text-lg mb-2">Movie Recommendation Engine</h3>
+      <p class="text-sm mb-4" style="color:var(--muted);">TF-IDF + Cosine Similarity recommendation pipeline. Vectorized NumPy operations lifted throughput 35%, plus a hybrid fallback for cold starts.</p>
+      <div class="skill-row">
+        <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span>
+      </div>
+    </div>
+
+    <!-- Placeholder for your next project. Change href below to that project's link/repo when it's ready.
+    <a href="https://github.com/souravkumarsaw" target="_blank" class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+      border-style:dashed;min-height:180px;text-decoration:none;color:var(--muted);">
+      <span style="font-size:2.2rem;line-height:1;color:var(--signal);">+</span>
+      <span class="text-sm mt-3">Add new project</span>
+    </a>
+  </div> -->
+  <div class="text-center mt-10">
+    <a href="https://github.com/souravkumarsaw" target="_blank" class="btn btn-line">See more on GitHub</a>
+  </div>
+</section>
+
+<section id="skills" class="container reveal" style="padding-bottom:90px;">
+  <div class="eyebrow mono mb-2">03 — Skills</div>
+  <h2 class="text-3xl font-semibold mb-10">What I work with</h2>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="card">
+      <p class="font-semibold mb-3" style="color:var(--signal);">Languages & Core</p>
+      <div class="skill-row">
+        <span class="tag">C++</span><span class="tag">Java</span><span class="tag">Python</span><span class="tag">C</span>
+        <span class="tag">Embedded C</span><span class="tag">SQL</span><span class="tag">HTML5/CSS3</span>
+        <span class="tag">DSA</span><span class="tag">OOD</span><span class="tag">LLD</span><span class="tag">System Design</span>
+      </div>
+    </div>
+    <div class="card">
+      <p class="font-semibold mb-3" style="color:var(--signal);">Frameworks & Data</p>
+      <div class="skill-row">
+        <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Express</span>
+        <span class="tag">WebRTC</span><span class="tag">Socket.io</span><span class="tag">NumPy</span>
+        <span class="tag">Pandas</span><span class="tag">Scikit-learn</span>
+        <span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">MySQL</span>
+      </div>
+    </div>
+    <div class="card">
+      <p class="font-semibold mb-3" style="color:var(--signal);">Tools & Platforms</p>
+      <div class="skill-row">
+        <span class="tag">Git/GitHub</span><span class="tag">GitLab</span><span class="tag">Linux</span>
+        <span class="tag">VS Code</span><span class="tag">Android Studio</span><span class="tag">Agile</span><span class="tag">REST APIs</span>
+      </div>
+    </div><div class="card">
+      <p class="font-semibold mb-3" style="color:var(--signal);">IoT & Embedded</p>
+      <div class="skill-row">
+        <span class="tag">MQTT</span><span class="tag">Teltonika Configurator</span><span class="tag">Flespi</span>
+        <span class="tag">FOTA Web</span><span class="tag">Arduino IDE</span><span class="tag">QFIL</span><span class="tag">AirDroid Biz Daemon</span>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<section id="education" class="container reveal" style="padding-bottom:90px;">
+  <div class="eyebrow mono mb-2">04 — Education & Certifications</div>
+  <h2 class="text-3xl font-semibold mb-10">Background</h2>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="card">
+      <p class="font-semibold">B.E., Computer Science and Engineering</p>
+      <p class="eyebrow mt-1">Chandigarh University · Aug 2021 — May 2025</p>
+      <div class="mt-5 pt-5" style="border-top:1px solid var(--line);">
+        <p class="font-semibold">Higher Secondary (CBSE)</p>
+        <p class="eyebrow mt-1">D.A.V. Public School, Kusunda, Dhanbad · 2019 — 2021 · 79.86%</p>
+      </div>
+    </div>
+    <div class="card">
+      <p class="font-semibold mb-3">Certifications & Achievements</p>
+      <ul class="space-y-2 text-sm" style="color:var(--muted);">
+        <li>SAP Certified — Security Administrator</li>
+        <li>SAP Certified — Database Administrator, SAP HANA</li>
+        <li>HackerRank Certified: C++ (5-Star)</li>
+        <li>Published research paper on a MERN Stack real-time video calling application</li>
+        <li>Deep Learning & Reinforcement Learning (IBM/Coursera), Java Specialization, Cybersecurity Tools & Cyberattacks (IBM)</li>
       </ul>
     </div>
-
+  </div>
+  <div class="card mt-8">
+    <p class="font-semibold mb-4">Find my Developer's Profile elsewhere</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;">
+      <a href="https://github.com/souravkumarsaw" target="_blank" class="btn btn-line" style="justify-content:center;padding:14px 10px;font-size:13px;">
+        <svg width="16" height="16"><use href="#i-github"/></svg> GitHub</a>
+      <a href="https://leetcode.com/u/SouravKr646/" target="_blank" class="btn btn-line" style="justify-content:center;padding:14px 10px;font-size:13px;">
+        <span class="mono" style="color:var(--signal2);">LC</span> LeetCode</a>
+      <a href="https://www.hackerrank.com/souravkumarsaw41" target="_blank" class="btn btn-line" style="justify-content:center;padding:14px 10px;font-size:13px;">
+        <span class="mono" style="color:var(--signal2);">HR</span> HackerRank</a>
+      <a href="https://www.codechef.com/users/s_k646" target="_blank" class="btn btn-line" style="justify-content:center;padding:14px 10px;font-size:13px;">
+        <span class="mono" style="color:var(--signal2);">CC</span> CodeChef</a>
     </div>
   </div>
 </section>
 
-
-
-
-
-
-
-
-<section id="projects" class="py-20 section-reveal">
-<div class="max-w-7xl mx-auto px-6">
-<div class="text-center mb-16">
-<h2 class="text-4xl font-bold mb-4">E-COMMERCE PORTFOLIO</h2>
-<p class="text-gray-300 mb-8">
-I provide tech solutions to my clients on Shopify and Wix as an expert web developer.
-</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-<div class="project-card rounded-2xl overflow-hidden group" data-project="video-calling">
-<div class="relative overflow-hidden">
-<img src="https://readdy.ai/api/search-image?query=modern%20video%20calling%20application%20interface%20with%20multiple%20participant%20windows%2C%20clean%20professional%20design%2C%20blue%20and%20green%20color%20scheme%2C%20WebRTC%20technology%20dashboard%2C%20real-time%20communication%20platform&width=400&height=250&seq=video-call-1&orientation=landscape"
-alt="Video Calling App"
-class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
-<div class="absolute top-4 left-4">
-<span class="bg-primary text-gray-900 px-3 py-1 rounded-full text-xs font-semibold">MERN STACK</span>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-lg font-semibold mb-2">Video Calling App</h3>
-<p class="text-gray-400 text-sm mb-4">Real-time video communication platform built with WebRTC and Socket.io for seamless peer-to-peer connections.</p>
-<div class="flex items-center justify-between">
-<span class="text-xs text-gray-500">MERN, WebRTC, Socket.io</span>
-<button class="upload-btn w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
-<i class="ri-upload-line"></i>
-</button>
-</div>
-</div>
-</div>
-<div class="project-card rounded-2xl overflow-hidden group" data-project="voting-system">
-<div class="relative overflow-hidden">
-<img src="https://readdy.ai/api/search-image?query=secure%20online%20voting%20system%20interface%20with%20ballot%20boxes%20and%20encryption%20elements%2C%20professional%20election%20technology%20dashboard%2C%20blue%20and%20white%20clean%20design%2C%20democratic%20process%20visualization&width=400&height=250&seq=voting-sys-1&orientation=landscape"
-alt="Online Voting System"
-class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
-<div class="absolute top-4 left-4">
-<span class="bg-secondary text-white px-3 py-1 rounded-full text-xs font-semibold">REAL-TIME</span>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-lg font-semibold mb-2">Online Voting System</h3>
-<p class="text-gray-400 text-sm mb-4">Secure and encrypted voting platform with real-time results and comprehensive admin dashboard.</p>
-<div class="flex items-center justify-between">
-<span class="text-xs text-gray-500">Real-time, Encrypted</span>
-<button class="upload-btn w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
-<i class="ri-upload-line"></i>
-</button>
-</div>
-</div>
-</div>
-<div class="project-card rounded-2xl overflow-hidden group" data-project="restaurant-system">
-<div class="relative overflow-hidden">
-<img src="https://readdy.ai/api/search-image?query=restaurant%20management%20system%20dashboard%20with%20order%20tracking%20and%20menu%20items%2C%20warm%20orange%20and%20brown%20colors%2C%20professional%20food%20service%20interface%2C%20kitchen%20display%20system&width=400&height=250&seq=restaurant-1&orientation=landscape"
-alt="Restaurant System"
-class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
-<div class="absolute top-4 left-4">
-<span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">PHP & MYSQL</span>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-lg font-semibold mb-2">Restaurant System</h3>
-<p class="text-gray-400 text-sm mb-4">Full-featured restaurant management solution built with PHP and MySQL for order processing.</p>
-<div class="flex items-center justify-between">
-<span class="text-xs text-gray-500">PHP, MySQL</span>
-<button class="upload-btn w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
-<i class="ri-upload-line"></i>
-</button>
-</div>
-</div>
-</div>
-<div class="project-card rounded-2xl overflow-hidden group" data-project="movie-recommender">
-<div class="relative overflow-hidden">
-<img src="https://readdy.ai/api/search-image?query=movie%20recommendation%20engine%20interface%20with%20film%20posters%20and%20rating%20systems%2C%20AI%20algorithm%20visualization%2C%20purple%20and%20gold%20entertainment%20dashboard%2C%20cinema%20technology%20platform&width=400&height=250&seq=movie-rec-1&orientation=landscape"
-alt="Movie Recommender"
-class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
-<div class="absolute top-4 left-4">
-<span class="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold">PYTHON ML</span>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-lg font-semibold mb-2">Movie Recommender</h3>
-<p class="text-gray-400 text-sm mb-4">Machine learning powered recommendation system using Python for personalized movie suggestions.</p>
-<div class="flex items-center justify-between">
-<span class="text-xs text-gray-500">Python ML, Cosine Similarity</span>
-<button class="upload-btn w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
-<i class="ri-upload-line"></i>
-</button>
-</div>
-</div>
-</div>
-<div class="project-card rounded-2xl overflow-hidden group" data-project="ecommerce-platform">
-<div class="relative overflow-hidden">
-<img src="https://readdy.ai/api/search-image?query=modern%20e-commerce%20platform%20interface%20with%20product%20grid%20and%20shopping%20cart%2C%20green%20and%20white%20professional%20design%2C%20online%20retail%20dashboard%2C%20digital%20marketplace%20technology&width=400&height=250&seq=ecommerce-1&orientation=landscape"
-alt="E-commerce Platform"
-class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
-<div class="absolute top-4 left-4">
-<span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">MERN STACK</span>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-lg font-semibold mb-2">E-commerce Platform</h3>
-<p class="text-gray-400 text-sm mb-4">Complete online shopping solution with payment integration and inventory management.</p>
-<div class="flex items-center justify-between">
-<span class="text-xs text-gray-500">MERN Stack</span>
-<button class="upload-btn w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
-<i class="ri-upload-line"></i>
-</button>
-</div>
-</div>
-</div>
-<div class="project-card rounded-2xl overflow-hidden group" data-project="task-manager">
-<div class="relative overflow-hidden">
-<img src="https://readdy.ai/api/search-image?query=task%20management%20application%20with%20kanban%20board%20and%20productivity%20dashboard%2C%20blue%20and%20gray%20professional%20design%2C%20project%20tracking%20interface%2C%20team%20collaboration%20tools&width=400&height=250&seq=task-mgr-1&orientation=landscape"
-alt="Task Manager"
-class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
-<div class="absolute top-4 left-4">
-<span class="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">REACT</span>
-</div>
-</div>
-<div class="p-6">
-<h3 class="text-lg font-semibold mb-2">Task Management App</h3>
-<p class="text-gray-400 text-sm mb-4">Comprehensive project management tool with team collaboration features and progress tracking.</p>
-<div class="flex items-center justify-between">
-<span class="text-xs text-gray-500">React & Node.js</span>
-<button class="upload-btn w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
-<i class="ri-upload-line"></i>
-</button>
-</div>
-</div>
-</div>
-</div>
-<div class="text-center mt-12">
-<a href="https://github.com/souravkumarsaw" target="_blank" class="glow-button bg-primary text-gray-900 px-8 py-3 !rounded-button font-semibold hover:bg-secondary transition-all duration-300 whitespace-nowrap">
-See More on GitHub
-</a>
-</div>
-</div>
-</section>
-
-
-
-
-
-<section id="contact" class="py-20 section-reveal">
-  <div class="max-w-4xl mx-auto px-6 text-center">
-    <h2 class="text-5xl font-bold mb-8">
-      Let's build something<br>
-      awesome together
-    </h2>
-    <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-      Ready to bring your ideas to life? Let's discuss your project and create something amazing together.
-    </p>
-
-    <!-- Contact Form -->
-    <form id="contact-form" class="space-y-6 max-w-2xl mx-auto text-left bg-gray-800 p-8 rounded-2xl shadow-lg">
-      <div>
-        <label class="block text-gray-300 mb-2">Your Name</label>
-        <input type="text" name="from_name" required
-          class="w-full p-3 rounded-lg bg-gray-900 border border-gray-600 text-gray-100">
+<section id="contact" class="container reveal" style="padding-bottom:110px;">
+  <div class="card" style="padding:44px 32px;max-width:620px;margin:0 auto;">
+    <h2 class="text-3xl font-semibold mb-3 text-center">Let's build something.</h2>
+    <p class="mb-8 text-center" style="color:var(--muted);">Hiring, collaborating, or just want to talk systems — my inbox is open.</p>
+    <form id="contact-form">
+      <div class="mb-5">
+        <label class="field-label">Your Name</label>
+        <input type="text" name="name" class="field-input" required>
       </div>
-
-      <div>
-        <label class="block text-gray-300 mb-2">Your Email</label>
-        <input type="email" name="reply_to" required
-          class="w-full p-3 rounded-lg bg-gray-900 border border-gray-600 text-gray-100">
+      <div class="mb-5">
+        <label class="field-label">Your Email</label>
+        <input type="email" name="email" class="field-input" required>
       </div>
-
-      <div>
-        <label class="block text-gray-300 mb-2">Purpose</label>
-        <select name="purpose" required
-          class="w-full p-3 rounded-lg bg-gray-900 border border-gray-600 text-gray-100">
+      <div class="mb-5">
+        <label class="field-label">Purpose</label>
+        <select name="purpose" class="field-input" required>
           <option value="">-- Select --</option>
-          <option value="Project">Project Collaboration</option>
-          <option value="Job">Job Opportunity</option>
-          <option value="Networking">Networking</option>
-          <option value="Other">Other</option>
+          <option>Project Collaboration</option>
+          <option>Job Opportunity</option>
+          <option>Networking</option>
+          <option>Other</option>
         </select>
       </div>
-
-      <div>
-        <label class="block text-gray-300 mb-2">Message</label>
-        <textarea name="message" rows="5" required
-          class="w-full p-3 rounded-lg bg-gray-900 border border-gray-600 text-gray-100"></textarea>
+      <div class="mb-8">
+        <label class="field-label">Message</label>
+        <textarea name="message" rows="5" class="field-input" required></textarea>
       </div>
-
-      <div class="text-center">
-        <button type="submit"
-          class="glow-button bg-primary text-gray-900 px-12 py-4 !rounded-button font-semibold text-lg hover:bg-secondary transition-all duration-300 whitespace-nowrap">
-          Send Message
-        </button>
-      </div>
+      <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center;">Send Message</button>
     </form>
-
-    <p id="form-status" class="text-green-400 mt-4 hidden">✅ Thank you! Your message has been sent.</p>
+    <p id="contact-status" class="text-sm mt-4 text-center" style="color:var(--signal);display:none;">Opening your email app to send this…</p>
   </div>
 </section>
 
-<!-- EmailJS Script -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-<script>
-  (function() {
-    emailjs.init("2F-d0Z7zO19Yf8d4x"); // ✅ Your Public Key
-  })();
-
-  document.getElementById("contact-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    emailjs.sendForm("service_iynj76d", "template_g06na7n", this) // ✅ Service + Template ID
-      .then(function() {
-        document.getElementById("form-status").classList.remove("hidden");
-        document.getElementById("contact-form").reset();
-      }, function(error) {
-        alert("❌ Failed to send message. Error: " + JSON.stringify(error));
-      });
-  });
-</script>
-
-
-
-
-
-
-
-
-<footer class="py-12 border-t border-gray-800">
-<div class="max-w-7xl mx-auto px-6">
-<div class="flex flex-col md:flex-row justify-between items-center">
-<div class="mb-6 md:mb-0">
-<div class="font-['Pacifico'] text-3xl text-primary mb-2">S.K</div>
-<p class="text-gray-400 text-sm"><I>Software Developer</I></p>
-</div>
-</div>
-<div class="text-center mt-8 pt-8 border-t border-gray-800">
-<p class="text-gray-500 text-sm">© 2025 Sourav Kumar Saw. All rights reserved.</p>
-</div>
-</div>
+<footer class="container text-center" style="padding-bottom:calc(40px + var(--safe-b));">
+  <p class="eyebrow mono">© 2026 Sourav Kumar Saw</p>
 </footer>
 
 
+<script>
+try{
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}catch(e){}
 
+// sci-fi custom cursor
+try{
+  const dot=document.getElementById('cur-dot'), ring=document.getElementById('cur-ring');
+  let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;});
+  (function loop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>ring.style.cssText+=';width:52px;height:52px;opacity:1;border-color:#f59e0b;');
+    el.addEventListener('mouseleave',()=>ring.style.cssText+=';width:32px;height:32px;opacity:.6;border-color:#5eead4;');
+  });
+}catch(e){}
 
+// animated network background
+try{
+  const cv=document.getElementById('net'), ctx=cv.getContext('2d');
+  let W,H,pts=[];
+  function size(){W=cv.width=innerWidth;H=cv.height=document.body.scrollHeight;}
+  function init(){size();pts=Array.from({length:Math.min(70,Math.floor(W/26))},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3}));}
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});
+    for(let i=0;i<pts.length;i++){
+      ctx.fillStyle='rgba(94,234,212,.6)';ctx.beginPath();ctx.arc(pts[i].x,pts[i].y,1.4,0,7);ctx.fill();
+      for(let j=i+1;j<pts.length;j++){
+        const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.hypot(dx,dy);
+        if(d<130){ctx.strokeStyle=`rgba(94,234,212,${(1-d/130)*.25})`;ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.stroke();}
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  init(); tick();
+  addEventListener('resize',init);
+}catch(e){}
 
+// typewriter
+try{
+  const lines=["System Engineer @ TCS — SAP enterprise systems.","Ex Junior Software Engineer @ Mahat Lab — IoT & Real-Time Systems.","C++ · Java · Python · SQL · Linux · Git."];
+  const el=document.getElementById('typed');
+  let li=0,ci=0,deleting=false;
+  function step(){
+    const full=lines[li];
+    el.textContent=deleting?full.slice(0,ci--):full.slice(0,ci++);
+    let d=deleting?30:55;
+    if(!deleting && ci>full.length+1){deleting=true;d=1400;}
+    else if(deleting && ci<0){deleting=false;li=(li+1)%lines.length;d=300;}
+    setTimeout(step,d);
+  }
+  step();
+}catch(e){}
 
-<!--div id="admin-panel" class="admin-panel">
-<div class="p-6">
-<div class="flex items-center justify-between mb-6">
-<h3 class="text-xl font-semibold">Project Management</h3>
-<button id="close-admin" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary">
-<i class="ri-close-line"></i>
-</button>
-</div>
-<div class="space-y-6">
-<div>
-<label class="block text-sm font-medium mb-2">Select Project</label>
-<select id="project-select" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm">
-<option value="">Choose a project...</option>
-<option value="video-calling">Video Calling App</option>
-<option value="voting-system">Online Voting System</option>
-<option value="restaurant-system">Restaurant System</option>
-<option value="movie-recommender">Movie Recommender</option>
-<option value="ecommerce-platform">E-commerce Platform</option>
-<option value="task-manager">Task Manager</option>
-</select>
-</div>
+// count-up stats
+try{
+  const nums=document.querySelectorAll('.stat-num[data-count]');
+  const io2=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        const el=en.target, target=parseFloat(el.dataset.count), suf=el.dataset.suffix||'';
+        let cur=0; const step=target/40;
+        const t=setInterval(()=>{cur+=step; if(cur>=target){cur=target;clearInterval(t);}
+          el.textContent=(target%1!==0?cur.toFixed(1):Math.floor(cur))+suf;},25);
+        io2.unobserve(el);
+      }
+    });
+  },{threshold:.5});
+  nums.forEach(n=>io2.observe(n));
+}catch(e){}
 
-
-
-
-
-<div id="file-upload-section" class="hidden">
-<label class="block text-sm font-medium mb-2">Upload Project Files</label>
-<div id="drop-zone" class="upload-area border-2 border-dashed border-gray-600 rounded-lg p-8 text-center cursor-pointer">
-<i class="ri-upload-cloud-line text-3xl text-gray-400 mb-2"></i>
-<p class="text-gray-400 text-sm">Drag & drop files here or click to browse</p>
-<input type="file" id="file-input" multiple class="hidden" accept=".js,.html,.css,.py,.cpp,.java,.md,.txt,.json">
-</div>
-</div>
-<div id="uploaded-files" class="hidden">
-<label class="block text-sm font-medium mb-2">Uploaded Files</label>
-<div id="files-list" class="space-y-2 max-h-40 overflow-y-auto">
-</div>
-</div>
-<div>
-<label class="block text-sm font-medium mb-2">Project Links</label>
-<div class="space-y-2">
-<input type="url" id="github-link" placeholder="GitHub Repository URL" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm">
-<input type="url" id="live-demo" placeholder="Live Demo URL" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm">
-</div>
-</div>
-<button id="save-project" class="w-full bg-primary text-gray-900 py-2 !rounded-button font-semibold hover:bg-secondary transition-colors whitespace-nowrap">
-Save Project
-</button>
-</div>
-</div>
-</div-->
-
-
-
-
-
-
-
-
-
-<script id="particle-system">
-document.addEventListener('DOMContentLoaded', function() {
-const container = document.getElementById('particles-container');
-const colors = ['#10b981', '#8b5cf6', '#3b82f6', '#f59e0b', '#ef4444'];
-function createParticle() {
-const particle = document.createElement('div');
-particle.className = 'particle';
-const size = Math.random() * 8 + 3;
-const color = colors[Math.floor(Math.random() * colors.length)];
-const x = Math.random() * window.innerWidth;
-const y = Math.random() * window.innerHeight;
-const duration = Math.random() * 6 + 6;
-const delay = Math.random() * 3;
-particle.style.width = size + 'px';
-particle.style.height = size + 'px';
-particle.style.backgroundColor = color;
-particle.style.left = x + 'px';
-particle.style.top = y + 'px';
-particle.style.animationDuration = duration + 's';
-particle.style.animationDelay = delay + 's';
-container.appendChild(particle);
-setTimeout(() => {
-if (particle.parentNode) {
-particle.parentNode.removeChild(particle);
-}
-}, (duration + delay) * 1000);
-}
-for (let i = 0; i < 60; i++) {
-setTimeout(createParticle, i * 150);
-}
-setInterval(createParticle, 300);
-document.addEventListener('mousemove', function(e) {
-if (Math.random() < 0.1) {
-const particle = document.createElement('div');
-particle.className = 'particle';
-particle.style.width = '4px';
-particle.style.height = '4px';
-particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-particle.style.left = e.clientX + 'px';
-particle.style.top = e.clientY + 'px';
-particle.style.animationDuration = '2s';
-container.appendChild(particle);
-setTimeout(() => {
-if (particle.parentNode) {
-particle.parentNode.removeChild(particle);
-}
-}, 2000);
-}
-});
-});
-</script>
-<script id="scroll-animations">
-document.addEventListener('DOMContentLoaded', function() {
-const observerOptions = {
-threshold: 0.1,
-rootMargin: '0px 0px -50px 0px'
-};
-const observer = new IntersectionObserver(function(entries) {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.classList.add('revealed');
-}
-});
-}, observerOptions);
-document.querySelectorAll('.section-reveal').forEach(section => {
-observer.observe(section);
-});
-const links = document.querySelectorAll('a[href^="#"]');
-links.forEach(link => {
-link.addEventListener('click', function(e) {
-e.preventDefault();
-const targetId = this.getAttribute('href').substring(1);
-const targetElement = document.getElementById(targetId);
-if (targetElement) {
-targetElement.scrollIntoView({
-behavior: 'smooth',
-block: 'start'
-});
-}
-});
-});
-});
-</script>
-
-
-
-
-
-<!--script id="admin-panel-functionality">
-document.addEventListener('DOMContentLoaded', function() {
-const adminToggle = document.getElementById('admin-toggle');
-const adminPanel = document.getElementById('admin-panel');
-const closeAdmin = document.getElementById('close-admin');
-const projectSelect = document.getElementById('project-select');
-const fileUploadSection = document.getElementById('file-upload-section');
-const uploadedFilesSection = document.getElementById('uploaded-files');
-const dropZone = document.getElementById('drop-zone');
-const fileInput = document.getElementById('file-input');
-const filesList = document.getElementById('files-list');
-const saveProject = document.getElementById('save-project');
-let projectFiles = {};
-adminToggle.addEventListener('click', function() {
-adminPanel.classList.add('open');
-});
-closeAdmin.addEventListener('click', function() {
-adminPanel.classList.remove('open');
-});
-projectSelect.addEventListener('change', function() {
-if (this.value) {
-fileUploadSection.classList.remove('hidden');
-if (projectFiles[this.value] && projectFiles[this.value].length > 0) {
-uploadedFilesSection.classList.remove('hidden');
-displayFiles(this.value);
-}
-} else {
-fileUploadSection.classList.add('hidden');
-uploadedFilesSection.classList.add('hidden');
-}
-});
-dropZone.addEventListener('click', function() {
-fileInput.click();
-});
-dropZone.addEventListener('dragover', function(e) {
-e.preventDefault();
-this.classList.add('dragover');
-});
-dropZone.addEventListener('dragleave', function() {
-this.classList.remove('dragover');
-});
-dropZone.addEventListener('drop', function(e) {
-e.preventDefault();
-this.classList.remove('dragover');
-handleFiles(e.dataTransfer.files);
-});
-fileInput.addEventListener('change', function() {
-handleFiles(this.files);
-});
-function handleFiles(files) {
-const projectId = projectSelect.value;
-if (!projectId) return;
-if (!projectFiles[projectId]) {
-projectFiles[projectId] = [];
-}
-Array.from(files).forEach(file => {
-const fileData = {
-name: file.name,
-size: file.size,
-type: file.type,
-lastModified: file.lastModified
-};
-projectFiles[projectId].push(fileData);
-});
-uploadedFilesSection.classList.remove('hidden');
-displayFiles(projectId);
-}
-function displayFiles(projectId) {
-const files = projectFiles[projectId] || [];
-filesList.innerHTML = '';
-files.forEach((file, index) => {
-const fileItem = document.createElement('div');
-fileItem.className = 'flex items-center justify-between bg-gray-800 rounded-lg p-3';
-fileItem.innerHTML = `
-<div class="flex items-center space-x-3">
-<i class="ri-file-line text-primary"></i>
-<div>
-<p class="text-sm font-medium">${file.name}</p>
-<p class="text-xs text-gray-400">${(file.size / 1024).toFixed(1)} KB</p>
-</div>
-</div>
-<button class="remove-file w-6 h-6 flex items-center justify-center text-red-400 hover:text-red-300" data-project="${projectId}" data-index="${index}">
-<i class="ri-delete-bin-line text-sm"></i>
-</button>
-`;
-filesList.appendChild(fileItem);
-});
-document.querySelectorAll('.remove-file').forEach(btn => {
-btn.addEventListener('click', function() {
-const projectId = this.dataset.project;
-const index = parseInt(this.dataset.index);
-projectFiles[projectId].splice(index, 1);
-displayFiles(projectId);
-if (projectFiles[projectId].length === 0) {
-uploadedFilesSection.classList.add('hidden');
-}
-});
-});
-}
-saveProject.addEventListener('click', function() {
-const projectId = projectSelect.value;
-const githubLink = document.getElementById('github-link').value;
-const liveDemo = document.getElementById('live-demo').value;
-if (!projectId) {
-alert('Please select a project first');
-return;
-}
-const projectData = {
-files: projectFiles[projectId] || [],
-githubLink: githubLink,
-liveDemo: liveDemo,
-lastUpdated: new Date().toISOString()
-};
-localStorage.setItem(`project_${projectId}`, JSON.stringify(projectData));
-alert('Project saved successfully!');
-adminPanel.classList.remove('open');
-});
-document.querySelectorAll('.upload-btn').forEach(btn => {
-btn.addEventListener('click', function() {
-const projectCard = this.closest('.project-card');
-const projectId = projectCard.dataset.project;
-projectSelect.value = projectId;
-projectSelect.dispatchEvent(new Event('change'));
-adminPanel.classList.add('open');
-});
-});
-});
-</script-->
-
-
-
-
-
-
-<script id="contact-functionality">
-document.addEventListener('DOMContentLoaded', function() {
-const contactBtn = document.getElementById('contact-btn');
-const connectBtns = document.querySelectorAll('button');
-contactBtn.addEventListener('click', function() {
-window.open('mailto:souravkumarsaw4344@gmail.com?subject=Project Collaboration Inquiry&body=Hi Sourav,%0D%0A%0D%0AI would like to discuss a potential project collaboration with you.%0D%0A%0D%0ABest regards', '_blank');
-});
-connectBtns.forEach(btn => {
-if (btn.textContent.includes('Connect')) {
-btn.addEventListener('click', function() {
-window.open('mailto:souravkumarsaw4344@gmail.com?subject=Let\'s Connect&body=Hi Sourav,%0D%0A%0D%0AI came across your portfolio and would love to connect with you.%0D%0A%0D%0ABest regards', '_blank');
-});
-}
-});
-});
+// contact form -> opens a pre-filled email (no backend on a static GitHub Pages site)
+try{
+  const form=document.getElementById('contact-form'), status=document.getElementById('contact-status');
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const d=new FormData(form);
+    const subject=`Portfolio contact: ${d.get('purpose')} — from ${d.get('name')}`;
+    const body=`Name: ${d.get('name')}\nEmail: ${d.get('email')}\nPurpose: ${d.get('purpose')}\n\n${d.get('message')}`;
+    window.location.href=`mailto:souravkumarsaw4344@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    status.style.display='block';
+  });
+}catch(e){}
 </script>
 </body>
 </html>
